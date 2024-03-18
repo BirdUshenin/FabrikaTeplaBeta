@@ -75,4 +75,7 @@ dependencies {
     // Image Coil
     implementation ("io.coil-kt:coil-compose:2.2.2")
 
+    // for ViewModel
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
+
 }

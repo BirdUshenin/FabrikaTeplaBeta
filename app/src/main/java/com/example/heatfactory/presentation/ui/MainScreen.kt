@@ -31,6 +31,8 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,18 +51,10 @@ import com.example.heatfactory.navigation.NavBarItem
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Preview
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: MainViewModel) {
 
-    val itemsState = remember { mutableStateOf<List<Item>>(emptyList()) }
-
-    LaunchedEffect(Unit) {
-        val items = fetchItems()
-        itemsState.value = items
-    }
-
-    val items = itemsState.value
+    val selectedNavItem by viewModel.selectedNavItem.observeAsState(NavBarItem.Home)
 
     val snackBarHostState = remember {
         SnackbarHostState()
@@ -101,26 +95,24 @@ fun MainScreen() {
         },
         bottomBar = {
             NavigationBar {
-                val selectedPosition = remember {
-                    mutableIntStateOf(0)
-                }
+
                 val items = listOf(
                     NavBarItem.Home,
                     NavBarItem.Favorite,
                     NavBarItem.Profile
                 )
-                items.forEachIndexed { index, it ->
+                items.forEach { item ->
                     NavigationBarItem(
-                        selected = selectedPosition.intValue == index,
-                        onClick = { selectedPosition.intValue = index },
+                        selected = selectedNavItem == item,
+                        onClick = { viewModel.selectNavItem(item) },
                         icon = {
                             Icon(
-                                it.icon,
+                                item.icon,
                                 contentDescription = null
                             )
                         },
                         label = {
-                            Text(text = stringResource(id = it.titleResId))
+                            Text(text = stringResource(id = item.titleResId))
                         },
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = Color.Blue,
@@ -132,13 +124,13 @@ fun MainScreen() {
                 }
             }
         }
-    ) {
-        LazyColumn {
-            items.forEach { item ->
-                item {
-                    Commodity(item = item)
-                }
+    ) { paddingValues ->
+        when(selectedNavItem){
+            NavBarItem.Home -> {
+                HomeScreen(viewModel = viewModel, paddingValues = paddingValues)
             }
+            NavBarItem.Favorite -> Text(text = "Favorite")
+            NavBarItem.Profile -> Text(text = "Profile")
         }
     }
 

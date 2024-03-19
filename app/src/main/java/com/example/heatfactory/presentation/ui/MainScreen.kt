@@ -82,7 +82,12 @@ fun MainScreen(viewModel: MainViewModel) {
                 items.forEach { item ->
                     NavigationBarItem(
                         selected = currentRoute == item.screen.route,
-                        onClick = { navHostController.navigate(item.screen.route) },
+                        onClick = {
+                            navHostController.navigate(item.screen.route) {
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
                         icon = {
                             Icon(
                                 item.icon,

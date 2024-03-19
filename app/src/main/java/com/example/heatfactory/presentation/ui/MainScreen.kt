@@ -1,6 +1,7 @@
 package com.example.heatfactory.presentation.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
@@ -23,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -119,7 +121,7 @@ fun MainScreen(viewModel: MainViewModel) {
             homeScreenContent = {
                 HomeScreen(
                     viewModel = viewModel,
-                    paddingValues = paddingValues
+                    paddingValues = paddingValues,
                 )
             },
             favoriteContent = { Text(text = "Favorite") },

@@ -1,8 +1,11 @@
 package com.example.heatfactory.presentation.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.heatfactory.data.Item
+import com.example.heatfactory.domain.ApiClient
 import com.example.heatfactory.navigation.NavBarItem
 
 class MainViewModel: ViewModel() {
@@ -13,4 +16,13 @@ class MainViewModel: ViewModel() {
         _selectedNavItem.value = item
     }
 
+    suspend fun fetchItems(): List<Item> {
+        return try {
+            val response = ApiClient.apiService.getItems()
+            response
+        } catch (e: Throwable) {
+            Log.d("Ushennnnnnn", "${e.message}")
+            emptyList()
+        }
+    }
 }

@@ -53,7 +53,7 @@ fun HomeScreen(
     val itemsState = remember { mutableStateOf<List<Item>>(emptyList()) }
 
     LaunchedEffect(Unit) {
-        val items = fetchItems()
+        val items = viewModel.fetchItems()
         itemsState.value = items
     }
 
@@ -149,12 +149,3 @@ fun Title(item: Item) {
     }
 }
 
-suspend fun fetchItems(): List<Item> {
-    return try {
-        val response = ApiClient.apiService.getItems()
-        response
-    } catch (e: Exception) {
-        Log.d("Ushennnnnnn", "${e.message}")
-        emptyList()
-    }
-}

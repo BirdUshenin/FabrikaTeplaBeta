@@ -1,10 +1,12 @@
 package com.example.heatfactory.presentation.ui.home
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavBackStackEntry
 import com.example.heatfactory.data.Item
 import com.example.heatfactory.domain.ApiClient
 import com.example.heatfactory.navigation.NavBarItem
@@ -47,6 +49,21 @@ class MainViewModel : ViewModel() {
                 )
             }
         }
+    }
+
+
+    fun onBackPress(){
+
+    }
+
+    private val backStackEntries = mutableStateListOf<NavBackStackEntry>()
+
+    fun addToBackStack(entry: NavBackStackEntry) {
+        backStackEntries.add(entry)
+    }
+
+    fun removeFromBackStack(entry: NavBackStackEntry) {
+        backStackEntries.remove(entry)
     }
 
 //    fun onClick() {

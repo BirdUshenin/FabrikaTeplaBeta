@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.heatfactory.navigation.AppNavGraph
 import com.example.heatfactory.navigation.NavBarItem
 import com.example.heatfactory.presentation.ui.home.HomeScreen
+import com.example.heatfactory.presentation.ui.home.ItemDetail
 import com.example.heatfactory.presentation.ui.home.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -36,12 +37,11 @@ import kotlinx.coroutines.launch
 fun MainScreen(viewModel: MainViewModel) {
 
     val navHostController = rememberNavController()
+    val scope = rememberCoroutineScope()
 
     val snackBarHostState = remember {
         SnackbarHostState()
     }
-
-    val scope = rememberCoroutineScope()
 
     val fabIsVisible = remember {
         mutableStateOf(true)
@@ -114,14 +114,15 @@ fun MainScreen(viewModel: MainViewModel) {
     ) { paddingValues ->
         AppNavGraph(
             navHostController = navHostController,
-            homeScreenContent = {
+            homeListScreenContent = {
                 HomeScreen(
                     viewModel = viewModel,
                     paddingValues = paddingValues,
                 )
             },
             favoriteContent = { Text(text = "Favorite") },
-            profileContent = { Text(text = "Profile") }
+            profileContent = { Text(text = "Profile") },
+            categoryContent = {  }
         )
     }
 

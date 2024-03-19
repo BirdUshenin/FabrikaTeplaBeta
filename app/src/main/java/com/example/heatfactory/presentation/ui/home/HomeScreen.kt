@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -31,7 +32,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,6 +43,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.heatfactory.R
 import com.example.heatfactory.data.Item
@@ -54,12 +59,12 @@ fun HomeScreen(
     viewModel: MainViewModel,
     paddingValues: PaddingValues,
 ) {
-
+    val navController = rememberNavController()
     val state by viewModel.state.collectAsState()
     val selectedItem = remember { mutableStateOf<Item?>(null) }
 
 //    BackHandler {
-//        viewModel.back()
+//
 //    }
 
     if (selectedItem.value != null) {
@@ -121,12 +126,20 @@ fun HomeScreen(
                     ) {
                         state.list.forEach { item ->
                             item {
-                                Commodity(
-                                    item = item,
-                                    onItemClick = {
-                                        selectedItem.value = it
+                                NavHost(navController = navController, startDestination = "mainScreen") {
+                                    composable("mainScreen") {
+                                        Commodity(
+                                            item = item,
+                                            onItemClick = {
+                                                selectedItem.value = it
+                                            }
+                                        )
                                     }
-                                )
+                                    composable("otherScreen") {
+
+
+                                    }
+                                }
                             }
                         }
                     }
@@ -135,6 +148,7 @@ fun HomeScreen(
         }
     }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -145,7 +159,7 @@ fun Commodity(
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
         onClick = { onItemClick(item) }
-        ) {
+    ) {
         Title(item = item)
         Image(
             painter = rememberAsyncImagePainter(

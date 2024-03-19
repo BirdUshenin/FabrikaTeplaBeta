@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.example.heatfactory.presentation.theme.HeatFactoryTheme
+import com.example.heatfactory.presentation.ui.home.MainViewModel
 
 class MainActivity : ComponentActivity() {
 

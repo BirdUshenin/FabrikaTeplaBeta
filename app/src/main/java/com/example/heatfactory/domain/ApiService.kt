@@ -10,4 +10,7 @@ interface ApiService {
 
     @GET("/HeatFactoryAPI/boilers.json")
     suspend fun getBoilers(): List<CategoryItem>
+
+    @GET("/HeatFactoryAPI/radiators.json")
+    suspend fun getRadiators(): List<CategoryItem>
 }

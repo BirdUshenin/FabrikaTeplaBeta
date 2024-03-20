@@ -122,6 +122,7 @@ fun CategoryScreen(
                                     item = item,
                                     onItemClick = {
                                         selectedItem.value = it
+                                        viewModel.updateId(it.id)
                                     }
                                 )
                             }

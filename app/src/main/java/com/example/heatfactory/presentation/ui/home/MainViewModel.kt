@@ -48,20 +48,4 @@ class MainViewModel : ViewModel() {
             }
         }
     }
-
-//    fun onClick() {
-//        _state.update {
-//            it.copy(
-//                error = true
-//            )
-//        }
-//    }
-
-//    fun back() {
-//        _state.update {
-//            it.copy(
-//                loading = true
-//            )
-//        }
-//    }
 }

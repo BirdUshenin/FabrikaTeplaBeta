@@ -3,7 +3,6 @@ package com.example.heatfactory.presentation.ui
 import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -26,14 +25,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.heatfactory.navigation.AppNavGraph
 import com.example.heatfactory.navigation.NavBarItem
+import com.example.heatfactory.presentation.ui.home.CategoryItem.CategoryViewModel
 import com.example.heatfactory.presentation.ui.home.HomeScreen
 import com.example.heatfactory.presentation.ui.home.MainViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
+fun MainScreen(
+    viewModel: MainViewModel,
+    categoryViewModel: CategoryViewModel
+) {
 
     val navHostController = rememberNavController()
 
@@ -118,6 +120,7 @@ fun MainScreen(viewModel: MainViewModel) {
                 HomeScreen(
                     viewModel = viewModel,
                     paddingValues = paddingValues,
+                    categoryViewModel = categoryViewModel
                 )
             },
             favoriteContent = { Text(text = "Favorite") },

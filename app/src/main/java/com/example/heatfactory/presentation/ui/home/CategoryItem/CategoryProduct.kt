@@ -3,6 +3,7 @@ package com.example.heatfactory.presentation.ui.home.CategoryItem
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,6 +45,7 @@ fun CategoryProduct(
     onBackPressed: () -> Unit,
     state: CategoryScreenState,
     selectedItem: MutableState<CategoryItem?>,
+    paddingValues: PaddingValues,
 ) {
     val isLoading by remember(state.loading) {
         mutableStateOf(state.loading)
@@ -89,8 +91,8 @@ fun CategoryProduct(
             }
         ) {
             LazyColumn(
-                modifier = Modifier.padding(top = 15.dp),
-                contentPadding = it
+                contentPadding = it,
+                modifier = Modifier.padding(paddingValues)
             ) {
                 state.list.forEach { item ->
                     item {
@@ -118,6 +120,9 @@ fun CategoryProductList(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
         onClick = { onItemClick(item) }
     ) {
+        Box(Modifier.padding(15.dp)) {
+            Text(text = item.name)
+        }
         Image(
             painter = rememberAsyncImagePainter(
                 item.imageSrc
@@ -127,9 +132,6 @@ fun CategoryProductList(
                 .height(250.dp),
             contentDescription = null
         )
-        Box(Modifier.padding(15.dp)) {
-            Text(text = item.name)
-        }
     }
 }
 

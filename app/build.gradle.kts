@@ -83,4 +83,7 @@ dependencies {
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
+    // System StatusBar Compose
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+
 }

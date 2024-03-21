@@ -43,6 +43,10 @@ class CategoryViewModel : ViewModel() {
             val response = when (id.value) {
                 1 -> ApiClient.apiService.getBoilers()
                 2 -> ApiClient.apiService.getRadiators()
+                3 -> ApiClient.apiService.getWaterHeaters()
+                4 -> ApiClient.apiService.getPumps()
+                5 -> ApiClient.apiService.getPipes()
+                6 -> ApiClient.apiService.getFloors()
                 else -> throw IllegalArgumentException("Unexpected id value: ${id.value}")
             }
             Log.d("Ushennn", "${id.value}")

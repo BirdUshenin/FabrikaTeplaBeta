@@ -40,7 +40,6 @@ class MainViewModel : ViewModel() {
                 )
             }
         } catch (e: Throwable) {
-            Log.d("Ushennnnnnn", "${e.message}")
             _state.update {
                 it.copy(
                     error = true

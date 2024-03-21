@@ -14,11 +14,11 @@ class CategoryViewModel : ViewModel() {
     private val _state: MutableStateFlow<CategoryScreenState> = MutableStateFlow(CategoryScreenState())
     val state = _state.asStateFlow()
     private val _id = MutableStateFlow(0)
-    val id: StateFlow<Int> = _id
+    private val id: StateFlow<Int> = _id
 
     init {
         viewModelScope.launch {
-            id.collect { newId ->
+            id.collect { _ ->
                 categoryItemsRequest()
                 delay(3000)
             }
@@ -28,7 +28,7 @@ class CategoryViewModel : ViewModel() {
     private suspend fun categoryItemsRequest() {
         _state.update {
             it.copy(
-                loading = true
+                loading = true, list = listOf()
             )
         }
         try {

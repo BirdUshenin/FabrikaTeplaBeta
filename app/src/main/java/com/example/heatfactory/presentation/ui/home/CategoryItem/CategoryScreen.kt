@@ -1,5 +1,6 @@
 package com.example.heatfactory.presentation.ui.home.CategoryItem
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -47,6 +48,7 @@ import com.example.heatfactory.data.CategoryItem
 import com.example.heatfactory.data.Item
 import com.example.heatfactory.presentation.ui.home.HomeScreenState
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun CategoryScreen(
@@ -61,7 +63,13 @@ fun CategoryScreen(
     val selectedCategoryItem = remember { mutableStateOf<CategoryItem?>(null) }
 
     if (selectedItem.value != null) {
-        CategoryProduct(selectedItem.value!!, navigateBack,  stateCategory, selectedCategoryItem)
+        CategoryProduct(
+            selectedItem.value!!,
+            navigateBack,
+            stateCategory,
+            selectedCategoryItem,
+            paddingValues
+        )
     } else {
         when {
             state.error -> {

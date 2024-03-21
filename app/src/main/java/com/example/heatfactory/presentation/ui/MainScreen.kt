@@ -59,8 +59,8 @@ fun MainScreen(
                     onClick = {
                         scope.launch {
                             val snackAction = snackBarHostState.showSnackbar(
-                                message = "This is PARTA",
-                                actionLabel = "Hide FAB",
+                                message = "Перейти в корзину",
+                                actionLabel = "Скрыть окно",
                                 duration = SnackbarDuration.Long
                             )
                             if (snackAction == SnackbarResult.ActionPerformed) {
@@ -104,9 +104,9 @@ fun MainScreen(
                             Text(text = stringResource(id = item.titleResId))
                         },
                         colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = Color.Blue,
+                            selectedIconColor = Color(0xFFFA6C37),
                             unselectedIconColor = Color.Black,
-                            selectedTextColor = Color.Blue,
+                            selectedTextColor = Color(0xFFFA6C37),
                             unselectedTextColor = Color.Black
                         )
                     )

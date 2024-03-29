@@ -1,6 +1,7 @@
 package com.example.heatfactory.presentation.ui.home.CategoryItem
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,8 +41,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.heatfactory.R
 import com.example.heatfactory.data.CategoryItem
@@ -119,11 +122,20 @@ fun CategoryScreen(
                         )
                     },
                 ) {
+
                     LazyColumn(
                         state = rememberStateScroll,
                         modifier = Modifier.padding(paddingValues),
                         contentPadding = it
                     ) {
+                        item {
+                            Text(
+                                text = "Категории",
+                                modifier = Modifier.fillMaxWidth().padding(top = 20.dp, bottom = 15.dp),
+                                textAlign = TextAlign.Center,
+                                fontSize = 24.sp
+                            )
+                        }
                         state.list.forEach { item ->
                             item {
                                 Commodity(
@@ -134,6 +146,16 @@ fun CategoryScreen(
                                     }
                                 )
                             }
+                        }
+                        item {
+                            Text(
+                                text = "Горячие скидки",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 50.dp),
+                                textAlign = TextAlign.Center,
+                                fontSize = 24.sp
+                            )
                         }
                     }
                 }
@@ -149,23 +171,32 @@ fun Commodity(
     onItemClick: (Item) -> Unit
 ) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
-        onClick = { onItemClick(item) }
-    ) {
-        Title(item = item)
-        Image(
-            painter = rememberAsyncImagePainter(
-                item.imageSrc
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp),
-            contentDescription = null
-        )
-        Box(Modifier.padding(15.dp)) {
-            Text(text = item.description)
+        modifier = Modifier.padding(5.dp)
+    ){
+        Card(
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+            onClick = { onItemClick(item) }
+        ) {
+            Title(item = item)
+            Image(
+                painter = rememberAsyncImagePainter(
+                    item.imageSrc
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp),
+                contentDescription = null
+            )
+            Box(Modifier.padding(15.dp)) {
+                Text(text = item.description,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
+
 }
 
 @Composable
@@ -179,8 +210,11 @@ fun Title(item: Item) {
         Spacer(modifier = Modifier.width(8.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(
+                modifier = Modifier.fillMaxWidth(),
                 text = item.name,
-                fontWeight = FontWeight.Bold
+                color = Color(0xFFFA6C37),
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.width(4.dp))
         }

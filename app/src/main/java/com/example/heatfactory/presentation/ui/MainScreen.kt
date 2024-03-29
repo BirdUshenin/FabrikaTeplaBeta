@@ -3,6 +3,7 @@ package com.example.heatfactory.presentation.ui
 import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -70,7 +71,7 @@ fun MainScreen(
                     }
                 ) {
                     Icon(
-                        Icons.Filled.Favorite,
+                        Icons.Filled.ShoppingCart,
                         contentDescription = null
                     )
                 }

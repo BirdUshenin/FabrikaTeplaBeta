@@ -1,23 +1,17 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "com.example.heatfactory"
+    namespace = "com.example.authorization"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.heatfactory"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -42,11 +36,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
@@ -69,26 +58,4 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-    // Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-
-    // Gson
-    implementation ("com.google.code.gson:gson:2.10")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // Image Coil
-    implementation ("io.coil-kt:coil-compose:2.2.2")
-
-    // for ViewModel
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
-
-    // Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-
-    // System StatusBar Compose
-    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
-
-    implementation(project(":Authorization"))
-
 }

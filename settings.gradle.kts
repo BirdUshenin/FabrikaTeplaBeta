@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "HeatFactory"
 include(":app")
- 
+include(":Authorization")
